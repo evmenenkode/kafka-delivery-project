@@ -4,15 +4,14 @@ delivery_dwh:
   outputs:
     dev:
       type: snowflake
-      account: reaumrq-sab33811
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
 
-      user: denisevmenenko
-      password: ###
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
 
-      role: ACCOUNTADMIN
-      database: DELIVERY_DB
-      warehouse: COMPUTE_WH
       schema: DEV
-
       threads: 4
       client_session_keep_alive: False
