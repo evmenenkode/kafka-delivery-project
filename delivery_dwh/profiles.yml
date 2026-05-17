@@ -7,7 +7,7 @@ delivery_dwh:
       account: reaumrq-sab33811
 
       user: denisevmenenko
-      password: Marinochka23!1996
+      password: ###
 
       role: ACCOUNTADMIN
       database: DELIVERY_DB
