@@ -10,14 +10,41 @@ jobs:
   run-dbt:
     runs-on: ubuntu-latest
 
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+      SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+      SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+
+    defaults:
+      run:
+        working-directory: delivery_dwh
+
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
       - name: Install dbt
         run: pip install dbt-snowflake
+
+      - name: Install dependencies
+        run: dbt deps
+
+      - name: Run staging models
+        run: dbt run --select staging
+
+      - name: Run marts models
+        run: dbt run --select marts
+
+      - name: Run CDM models
+        run: dbt run --select cdm
+
+      - name: Run tests
+        run: dbt test
