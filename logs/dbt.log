@@ -1,0 +1,48 @@
+[0m08:05:51.128499 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020DD820E7D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020DD9574430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020DD9574280>]}
+
+
+============================== 08:05:51.135227 | bd9b725f-4065-41b0-b729-26f77139240b ==============================
+[0m08:05:51.135227 [info ] [MainThread]: Running with dbt=1.11.10
+[0m08:05:51.136145 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Denis\\.dbt', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt init delivery_dwh', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m08:05:51.168601 [info ] [MainThread]: Creating dbt configuration folder at C:\Users\Denis\.dbt
+[0m08:05:51.172021 [debug] [MainThread]: Starter project path: C:\Users\Denis\kafka-delivery-project\venv_dbt\lib\site-packages\dbt\include\starter_project
+[0m08:05:51.294683 [info ] [MainThread]: 
+Your new dbt project "delivery_dwh" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m08:05:51.295693 [info ] [MainThread]: Setting up your profile.
+[0m08:05:58.713458 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m08:05:58.714462 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m08:05:58.715459 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m08:07:39.066007 [info ] [MainThread]: Profile delivery_dwh written to C:\Users\Denis\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m08:07:39.068950 [debug] [MainThread]: Command `dbt init` succeeded at 08:07:39.068057 after 108.06 seconds
+[0m08:07:39.069652 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020DD820E7D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020DD538B6A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020DD95751B0>]}
+[0m08:07:39.070197 [debug] [MainThread]: Flushing usage events
+[0m08:07:39.411158 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m08:27:07.802528 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028CC213E800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028CC34FC490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028CC34FC2B0>]}
+
+
+============================== 08:27:07.808527 | dacf7ff7-cd63-4b42-bbac-004916f61184 ==============================
+[0m08:27:07.808527 [info ] [MainThread]: Running with dbt=1.11.10
+[0m08:27:07.809563 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\Denis\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'invocation_command': 'dbt run', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m08:27:07.810966 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path C:\Users\Denis\kafka-delivery-project\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m08:27:07.813372 [debug] [MainThread]: Command `dbt run` failed at 08:27:07.813372 after 0.15 seconds
+[0m08:27:07.814481 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028CC213E800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028CC34FC280>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028CC34FC4F0>]}
+[0m08:27:07.816480 [debug] [MainThread]: Flushing usage events
+[0m08:27:08.157543 [debug] [MainThread]: An error was encountered while trying to flush usage events

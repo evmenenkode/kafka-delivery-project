@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: dim_users
+    description: "User dimension table"
+
+  - name: dim_products
+    description: "Product dimension table"
+
+  - name: fct_events
+    description: "Fact table for events"
