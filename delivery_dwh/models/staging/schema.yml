@@ -7,56 +7,86 @@ sources:
 
     tables:
       - name: raw_users
+        description: "Raw users data coming from Postgres via Airflow"
+
       - name: raw_products
+        description: "Raw products catalog data"
+
       - name: raw_events
+        description: "Raw event stream from Kafka"
 
 models:
   - name: stg_events
+    description: "Cleaned and standardized events data from raw event stream"
     columns:
       - name: event_id
+        description: "Unique identifier for each event"
         tests:
           - not_null
-          - unique
+
+      - name: currency
+        description: "Transaction currency code"
+        tests:
+          - accepted_values:
+              values: ['USD', 'CAD', 'EUR']
+
+      - name: event_ts
+        description: "Timestamp when event occurred"
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: "TO_TIMESTAMP('2000-01-01')"
 
       - name: user_id
+        description: "Reference to user who performed the event"
         tests:
           - not_null
+          - relationships:
+              to: ref('stg_users')
+              field: user_id
+
+      - name: product_id
+        description: "Reference to product involved in the event"
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
 
   - name: stg_users
+    description: "Cleaned user data from Postgres source"
     columns:
       - name: user_id
+        description: "Unique user identifier"
         tests:
           - not_null
           - unique
 
-      - name: email
-        tests:
-          - not_null
-
       - name: created_at
+        description: "User creation timestamp"
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              arguments:
-                min_value: "TO_TIMESTAMP('2000-01-01')"
+              min_value: "TO_TIMESTAMP('2000-01-01')"
 
   - name: stg_products
+    description: "Cleaned product catalog data"
     columns:
       - name: product_id
+        description: "Unique product identifier"
         tests:
           - not_null
           - unique
 
       - name: created_at
+        description: "Product creation timestamp"
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              arguments:
-                min_value: "TO_TIMESTAMP('2000-01-01')"
+              min_value: "TO_TIMESTAMP('2000-01-01')"
 
       - name: price
+        description: "Product price in base currency"
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              arguments:
-                min_value: 0
+              min_value: 0

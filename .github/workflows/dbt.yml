@@ -1,23 +1,62 @@
-name: dbt pipeline
+name: dbt CI
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
 
 jobs:
-  run-dbt:
+  validate-dbt:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: delivery_dwh
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
       - name: Install dbt
         run: pip install dbt-snowflake
+
+      - name: Install dependencies
+        run: dbt deps
+
+      - name: Validate project (parse)
+        run: dbt parse
+
+      - name: Compile project
+        run: dbt compile
+
+      - name: List models
+        run: dbt list
+
+      - name: Generate dbt docs
+        run: dbt docs generate
+
+      - name: Upload dbt docs artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: delivery_dwh/target
+
+
+  deploy-docs:
+    needs: validate-dbt
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

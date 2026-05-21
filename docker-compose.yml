@@ -59,7 +59,7 @@ services:
 
   # ---------------- AIRFLOW ----------------
   airflow-webserver:
-    image: apache/airflow:2.9.1
+    build: .
     container_name: airflow-webserver
     depends_on:
       - airflow-postgres
@@ -72,11 +72,12 @@ services:
       AIRFLOW__WEBSERVER__SECRET_KEY: "supersecretkey123"
     volumes:
       - ./dags:/opt/airflow/dags
+      - ./delivery_dwh:/opt/dbt/delivery_dwh
       - ./requirements.txt:/requirements.txt
     command: bash -c "pip install -r /requirements.txt && airflow webserver"
 
   airflow-scheduler:
-    image: apache/airflow:2.9.1
+    build: .
     container_name: airflow-scheduler
     depends_on:
       - airflow-postgres
@@ -87,6 +88,7 @@ services:
       AIRFLOW__WEBSERVER__SECRET_KEY: "supersecretkey123"
     volumes:
       - ./dags:/opt/airflow/dags
+      - ./delivery_dwh:/opt/dbt/delivery_dwh
       - ./requirements.txt:/requirements.txt
     command: bash -c "pip install -r /requirements.txt && airflow scheduler"
 
