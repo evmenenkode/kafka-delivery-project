@@ -48,7 +48,6 @@ jobs:
         with:
           path: delivery_dwh/target
 
-
   deploy-docs:
     needs: validate-dbt
     runs-on: ubuntu-latest
