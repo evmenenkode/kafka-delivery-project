@@ -1,0 +1,68 @@
+version: 2
+
+models:
+
+  - name: dim_users
+    description: "Dimension table containing unique users with surrogate key for analytics joins"
+    columns:
+      - name: user_sk
+        description: "Surrogate key for user (generated in dbt for stable joins)"
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: "Natural user identifier from source systems (Postgres / raw users)"
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_products
+    description: "Dimension table containing product catalog with surrogate keys"
+    columns:
+      - name: product_sk
+        description: "Surrogate key for product used in fact table joins"
+        tests:
+          - not_null
+          - unique
+
+      - name: product_id
+        description: "Natural product identifier from source system"
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_events
+    description: "Fact table containing all user interaction events with associated revenue and dimensions"
+    columns:
+      - name: event_id
+        description: "Unique identifier for each event (source system key)"
+        tests:
+          - not_null
+
+      - name: user_sk
+        description: "Foreign key to dim_users (surrogate key for user dimension)"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_users')
+              field: user_sk
+
+      - name: product_sk
+        description: "Foreign key to dim_products (surrogate key for product dimension)"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_sk
+
+      - name: event_ts
+        description: "Timestamp when event occurred in the system"
+        tests:
+          - not_null
+
+      - name: amount
+        description: "Monetary value associated with the event (revenue)"
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0

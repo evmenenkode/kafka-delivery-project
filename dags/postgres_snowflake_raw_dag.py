@@ -16,11 +16,11 @@ default_args = {
 }
 
 # ---------------------------
-# HELPER (фикс Timestamp)
+# HELPER 
 # ---------------------------
 def serialize_dataframe(df):
     """
-    Преобразуем Timestamp → string (ISO)
+    Timestamp → string (ISO)
     """
     for col in df.columns:
         if str(df[col].dtype).startswith("datetime"):
@@ -35,7 +35,6 @@ def extract_users(**context):
     pg_hook = PostgresHook(postgres_conn_id="postgres_default")
     sf_hook = SnowflakeHook(snowflake_conn_id="snowflake_default")
 
-    # max user_id в Snowflake
     with sf_hook.get_conn() as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT MAX(user_id) FROM RAW.raw_users")

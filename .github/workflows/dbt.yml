@@ -1,15 +1,15 @@
-name: dbt pipeline
+name: dbt CI
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
-  schedule:
-    - cron: "0 6 * * *"
 
 jobs:
-  run-dbt:
+  validate-dbt:
     runs-on: ubuntu-latest
 
     env:
@@ -39,14 +39,31 @@ jobs:
       - name: Install dependencies
         run: dbt deps
 
-      - name: Run staging models
-        run: dbt run --select staging
+      - name: Validate project (parse)
+        run: dbt parse
 
-      - name: Run marts models
-        run: dbt run --select marts
+      - name: Compile project
+        run: dbt compile
 
-      - name: Run CDM models
-        run: dbt run --select cdm
+      - name: List models
+        run: dbt list
 
-      - name: Run tests
-        run: dbt test
+      - name: Generate dbt docs
+        run: dbt docs generate
+
+      - name: Upload dbt docs artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: delivery_dwh/target
+
+  deploy-docs:
+    needs: validate-dbt
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
