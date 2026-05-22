@@ -18,3 +18,8 @@ WHERE
     AND raw_data:event_id IS NOT NULL
     AND raw_data:user_id IS NOT NULL
     AND raw_data:event_timestamp IS NOT NULL
+
+QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY event_id
+    ORDER BY load_timestamp DESC
+) = 1

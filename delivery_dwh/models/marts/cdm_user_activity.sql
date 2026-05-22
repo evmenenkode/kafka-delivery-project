@@ -1,5 +1,8 @@
 {{ config(
-    materialized='table'
+    materialized='table',
+    meta={
+        "dashboard": "https://datastudio.google.com/reporting/f59aaaaf-5b32-43e7-a57b-f9ac32ce6a3d"
+    }
 ) }}
 
 SELECT
