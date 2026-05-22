@@ -7,6 +7,10 @@ models:
       Business-level aggregated view of user engagement and revenue.
       Each row represents a single user with summarized activity metrics
       derived from event-level data in fct_events.
+
+    meta:
+      dashboard_url: "https://lookerstudio.google.com/your-dashboard-link"
+
     columns:
       - name: user_id
         description: "Unique identifier of a user from the system"
@@ -36,6 +40,10 @@ models:
     description: >
       Aggregated product performance metrics showing revenue contribution
       and sales activity per product.
+
+    meta:
+      dashboard_url: "https://lookerstudio.google.com/your-dashboard-link"
+
     columns:
       - name: product_id
         description: "Unique product identifier from product dimension"
@@ -56,6 +64,10 @@ models:
     description: >
       Daily aggregated business KPI table used for monitoring overall
       platform performance and trends over time.
+
+    meta:
+      dashboard_url: "https://lookerstudio.google.com/your-dashboard-link"
+      
     columns:
       - name: date
         description: "Calendar date of aggregated metrics"
