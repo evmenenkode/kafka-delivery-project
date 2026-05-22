@@ -9,7 +9,7 @@ models:
       derived from event-level data in fct_events.
 
     meta:
-      dashboard_url: "https://lookerstudio.google.com/your-dashboard-link"
+      dashboard_url: "https://datastudio.google.com/reporting/f59aaaaf-5b32-43e7-a57b-f9ac32ce6a3d"
 
     columns:
       - name: user_id
@@ -42,7 +42,7 @@ models:
       and sales activity per product.
 
     meta:
-      dashboard_url: "https://lookerstudio.google.com/your-dashboard-link"
+      dashboard_url: "https://datastudio.google.com/reporting/f59aaaaf-5b32-43e7-a57b-f9ac32ce6a3d"
 
     columns:
       - name: product_id
@@ -66,8 +66,8 @@ models:
       platform performance and trends over time.
 
     meta:
-      dashboard_url: "https://lookerstudio.google.com/your-dashboard-link"
-      
+      dashboard_url: "https://datastudio.google.com/reporting/f59aaaaf-5b32-43e7-a57b-f9ac32ce6a3d"
+
     columns:
       - name: date
         description: "Calendar date of aggregated metrics"
