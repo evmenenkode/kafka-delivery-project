@@ -369,7 +369,7 @@ Potential next steps:
 
 Denis Evmenenko
 
-LinkedIn: *(add your LinkedIn here)*
+LinkedIn: https://www.linkedin.com/in/denis-evmenenko/
 
 GitHub: https://github.com/evmenenkode
 
